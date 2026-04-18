@@ -25,7 +25,8 @@ async def on_message(message: Message):
     if message.content == "work":
         zp = random.randint(20,40)
         user_balance[message.author.id] = user_balance.get(message.author.id,250) + zp
-        print(f"вам начислено {zp} ткойнов")
+        await message.channel.send(f"вам начислено {zp} ткойнов")
+        return
 
     if message.content == 'balance':  # команда что бы показввала баланс
         await message.channel.send(f"Ваш баланс : {user_balance.get(message.author.id, 250)}")
