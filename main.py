@@ -27,8 +27,8 @@ async def on_message(message: Message):
         return
     user_balance[message.author.id] = user_balance.get(message.author.id,250) - cost
 
-    if message.content == 'balance':     # сказать Николаю то что я попытался
-        await message.channel.send(f"Ваш баланс : {user_balance}")                    # написать чтобы была команда баланс
+    if message.content == 'balance':    #команда что бы показввала баланс
+        await message.channel.send(f"Ваш баланс : {user_balance.get(message.author.id,250)}")
 
 
 bot.run(os.getenv("TG_API_TOKEN"))
