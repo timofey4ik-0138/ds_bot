@@ -1,3 +1,4 @@
+import random
 import dotenv
 import os
 import disnake  # подключаем библиотеку
@@ -21,6 +22,11 @@ async def on_message(message: Message):
     if message.author == bot.user:   # проверяем написал человек или бот (чтобы бот не отвечал самому себе)
         return
 
+    if message.content == "work":
+        zp = random.randint(20,40)
+        user_balance[message.author.id] = user_balance.get(message.author.id,250) + zp
+        print(f"вам начислено {zp} ткойнов")
+
     if message.content == 'balance':  # команда что бы показввала баланс
         await message.channel.send(f"Ваш баланс : {user_balance.get(message.author.id, 250)}")
         return
@@ -30,6 +36,7 @@ async def on_message(message: Message):
         await message.delete()
         return
     user_balance[message.author.id] = user_balance.get(message.author.id,250) - cost
+
 
 
 bot.run(os.getenv("TG_API_TOKEN"))
