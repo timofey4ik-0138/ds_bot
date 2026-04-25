@@ -15,11 +15,18 @@ user_balance = {}
 @bot.event
 async def on_ready():
     print(f"бот запустился. Привет {bot.user} ")
-
+ # random.choice(список шуток) - достает рандомную шутку из списка шуток список шуток надо сделать!!!!!
 
 @bot.event
 async def on_message(message: Message):
     if message.author == bot.user:   # проверяем написал человек или бот (чтобы бот не отвечал самому себе)
+        return
+
+    jokes = ["Блин! сказал слон наступив на колобка", "колобок повесился", "живой уголок на кладбище будка охраника",
+             "у пулемётчика нет цели. Есть только ратататата!"]
+    if message.content == "joke":
+        joke = random.choice(jokes)
+        await message.channel.send(joke)
         return
 
     if message.content == "work":
