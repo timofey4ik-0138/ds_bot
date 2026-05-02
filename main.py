@@ -31,7 +31,7 @@ async def on_message(message: Message):
         ckolko_tcoinov = int(args[2])
         user_balance[message.author.id] = user_balance.get(message.author.id,250) - ckolko_tcoinov
         user_balance[perevod_comy] = user_balance.get(perevod_comy,250) + ckolko_tcoinov
-
+        return
 
 
     jokes = ["Блин! сказал слон наступив на колобка", "колобок повесился", "живой уголок на кладбище будка охраника",
