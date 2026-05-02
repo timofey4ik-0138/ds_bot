@@ -22,6 +22,18 @@ async def on_message(message: Message):
     if message.author == bot.user:   # проверяем написал человек или бот (чтобы бот не отвечал самому себе)
         return
 
+    if message.content.startswith("perevod"):
+        args = message.content.split(" ")
+        if len(args) != 3:
+            await message.channel.send("Неправильное количество аргрументов")
+            return
+        perevod_comy = int(args[1])
+        ckolko_tcoinov = int(args[2])
+        user_balance[message.author.id] = user_balance.get(message.author.id,250) - ckolko_tcoinov
+        user_balance[perevod_comy] = user_balance.get(perevod_comy,250) + ckolko_tcoinov
+
+
+
     jokes = ["Блин! сказал слон наступив на колобка", "колобок повесился", "живой уголок на кладбище будка охраника",
              "у пулемётчика нет цели. Есть только ратататата!"]
     if message.content == "joke":
