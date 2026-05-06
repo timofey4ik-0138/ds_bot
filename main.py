@@ -32,7 +32,7 @@ async def on_message(message: Message):
         if ckolko_tcoinov < 0:
             await message.channel.send("братан ну не надо дюпать")
             return
-        if user_balance[message.author.id] < ckolko_tcoinov:
+        if user_balance.get(message.author.id,250) < ckolko_tcoinov:
             await message.channel.send("у вас нехватает ткойнов")
             return
         user_balance[message.author.id] = user_balance.get(message.author.id,250) - ckolko_tcoinov
