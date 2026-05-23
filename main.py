@@ -7,6 +7,7 @@ from disnake.message import Message
 dotenv.load_dotenv(".env")
 intents = disnake.Intents.all()    # подключаем разрешения
 intents.message_content = True
+intents.reactions = True
 # задаем префикс у команд
 bot = commands.Bot(intents=intents)
 
@@ -15,7 +16,16 @@ user_balance = {}
 @bot.event
 async def on_ready():
     print(f"бот запустился. Привет {bot.user} ")
- # random.choice(список шуток) - достает рандомную шутку из списка шуток список шуток надо сделать!!!!!
+
+
+@bot.event
+async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
+    channel = bot.get_channel(payload.channel_id)
+    message_id = payload.message_id
+    if message_id == 1497598491793555639:
+        if payload.emoji.name == "✅":
+            role = disnake.utils.get(payload.member.guild.roles,id = 1497604495654387803)
+            await payload.member.add_roles(role)
 
 @bot.event
 async def on_message(message: Message):
