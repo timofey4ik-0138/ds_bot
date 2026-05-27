@@ -43,6 +43,33 @@ async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
             role = disnake.utils.get(payload.member.guild.roles, id= 1497608508902871100)
             await payload.member.add_roles(role)
 
+@bot.event
+async def on_raw_reaction_remove(payload: disnake.RawReactionActionEvent):
+
+    message_id = payload.message_id
+    if message_id == 1497598491793555639:
+        if payload.emoji.name == "✅":
+            role = disnake.utils.get(payload.member.guild.roles,id = 1497604495654387803)
+            await payload.member.add_roles(role)
+
+    if message_id == 1501644881733619712:
+        if payload.emoji.name == "🟦":
+            role = disnake.utils.get(payload.member.guild.roles,id = 1497600723917996072)
+            await payload.member.remove_roles(role)
+
+        if payload.emoji.name == "🟩":
+            role = disnake.utils.get(payload.member.guild.roles, id=1497603202936340651)
+            await payload.member.remove_roles(role)
+
+        if payload.emoji.name == "🟫":
+            role = disnake.utils.get(payload.member.guild.roles, id= 1497607613322629130)
+            await payload.member.remove_roles(role)
+
+        if payload.emoji.name == "🟨":
+            role = disnake.utils.get(payload.member.guild.roles, id= 1497608508902871100)
+            await payload.member.remove_roles(role)
+
+
 
 @bot.event
 async def on_message(message: Message):
