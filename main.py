@@ -28,28 +28,30 @@ async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
             role = guild.get_role(1497604495654387803)
             await payload.member.add_roles(role)
             print(f"{datetime.now().strftime(TIME_FORMAT)} - INFO - add role({1497604495654387803}) to user({payload.user_id})")
+    role = guild.get_role(1497604495654387803)
+    if role in payload.member.roles:
+        if message_id == 1501644881733619712:
+            if payload.emoji.name == "🟦":
+                role = guild.get_role(1497600723917996072)
+                await payload.member.add_roles(role)
+                print(f"{datetime.now().strftime(TIME_FORMAT)} - INFO - add role({1497600723917996072}) to user({payload.user_id})")
 
-    if message_id == 1501644881733619712:
-        if payload.emoji.name == "🟦":
-            role = guild.get_role(1497600723917996072)
-            await payload.member.add_roles(role)
-            print(f"{datetime.now().strftime(TIME_FORMAT)} - INFO - add role({1497600723917996072}) to user({payload.user_id})")
+            if payload.emoji.name == "🟩":
+                role = guild.get_role(1497603202936340651)
+                await payload.member.add_roles(role)
+                print(f"{datetime.now().strftime(TIME_FORMAT)} - INFO - add role({1497603202936340651}) to user({payload.user_id})")
 
-        if payload.emoji.name == "🟩":
-            role = guild.get_role(1497603202936340651)
-            await payload.member.add_roles(role)
-            print(f"{datetime.now().strftime(TIME_FORMAT)} - INFO - add role({1497603202936340651}) to user({payload.user_id})")
+            if payload.emoji.name == "🟫":
+                role = guild.get_role(1497607613322629130)
+                await payload.member.add_roles(role)
+                print(f"{datetime.now().strftime(TIME_FORMAT)} - INFO - add role({1497607613322629130}) to user({payload.user_id})")
 
-        if payload.emoji.name == "🟫":
-            role = guild.get_role(1497607613322629130)
-            await payload.member.add_roles(role)
-            print(f"{datetime.now().strftime(TIME_FORMAT)} - INFO - add role({1497607613322629130}) to user({payload.user_id})")
-
-        if payload.emoji.name == "🟨":
-            role = guild.get_role(1497608508902871100)
-            await payload.member.add_roles(role)
-            print(f"{datetime.now().strftime(TIME_FORMAT)} - INFO - add role({1497608508902871100}) to user({payload.user_id})")
-
+            if payload.emoji.name == "🟨":
+                role = guild.get_role(1497608508902871100)
+                await payload.member.add_roles(role)
+                print(f"{datetime.now().strftime(TIME_FORMAT)} - INFO - add role({1497608508902871100}) to user({payload.user_id})")
+    else:
+        await payload.member.send(f"Здраствуйте. Перед тем как получить роль поставьте галочку, то что вы прочитали правила сервера.")
 @bot.event
 async def on_raw_reaction_remove(payload: disnake.RawReactionActionEvent):
 
