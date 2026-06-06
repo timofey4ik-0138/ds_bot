@@ -28,6 +28,7 @@ async def on_raw_reaction_add(payload: disnake.RawReactionActionEvent):
             role = guild.get_role(1497604495654387803)
             await payload.member.add_roles(role)
             print(f"{datetime.now().strftime(TIME_FORMAT)} - INFO - add role({1497604495654387803}) to user({payload.user_id})")
+        return
     role = guild.get_role(1497604495654387803)
     if role in payload.member.roles:
         if message_id == 1501644881733619712:
