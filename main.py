@@ -159,6 +159,8 @@ async def on_message(message: Message):
             role = guild.get_role(1515269161184661644)
             await message.author.add_roles(role)
             await message.channel.send("Вы успешно приобрели vip!")
+            return
+        return
 
     if message.content == 'balance':  # команда что бы показввала баланс
         await message.channel.send(f"Ваш баланс : {user_balance.get(message.author.id, 250)}")
