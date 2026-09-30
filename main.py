@@ -14,6 +14,8 @@ intents.reactions = True
 bot = commands.Bot(intents=intents)
 TIME_FORMAT = "%x %X"
 user_balance = {}
+last_use_balance = {}
+zarabotok_per_sek = {}
 
 
 def has_role_by_id(roles, role_id):
@@ -163,6 +165,12 @@ async def on_message(message: Message):
         return
 
     if message.content == 'balance':  # команда что бы показввала баланс
+        last_use:str = last_use_balance.get(message.author.id,datetime.now().strftime(TIME_FORMAT))
+        last_use_balance[message.author.id] = datetime.now().strftime(TIME_FORMAT)
+        raznica = datetime.now() - datetime.strptime(last_use,TIME_FORMAT)
+        money_offlaine = raznica.total_seconds() * zarabotok_per_sek.get(message.author.id,1)
+        user_balance[message.author.id] = user_balance.get(message.author.id,250) + money_offlaine
+        print(raznica.total_seconds())
         await message.channel.send(f"Ваш баланс : {user_balance.get(message.author.id, 250)}")
         return
 
