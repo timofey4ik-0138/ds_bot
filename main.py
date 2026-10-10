@@ -16,6 +16,7 @@ TIME_FORMAT = "%x %X"
 user_balance = {}
 last_use_balance = {}
 zarabotok_per_sek = {}
+zarabotok_lvl = {}
 
 
 def has_role_by_id(roles, role_id):
@@ -161,6 +162,15 @@ async def on_message(message: Message):
             role = guild.get_role(1515269161184661644)
             await message.author.add_roles(role)
             await message.channel.send("Вы успешно приобрели vip!")
+            return
+        if message.content.endswith("upgrade"):
+            if user_balance.get(message.author.id, 250) < 100 * (zarabotok_lvl.get(message.author.id,1) ** 1.5):
+                await message.channel.send(f"вам не хватает {100 * (zarabotok_lvl.get(message.author.id,1) ** 1.5) - user_balance.get(message.author.id, 250)}")
+                return
+            user_balance[message.author.id] = user_balance.get(message.author.id, 250) - 100 * (zarabotok_lvl.get(message.author.id,1) ** 1.5)
+            zarabotok_lvl[message.author.id] = zarabotok_lvl.get(message.author.id,1) + 1
+            zarabotok_per_sek[message.author.id] = zarabotok_per_sek.get(message.author.id, 1) + 1
+            await message.channel.send(f"Вы успешно купили upgrade ваш заработок увеличился и теперь составляет {zarabotok_per_sek.get(message.author.id, 1)}")
             return
         return
 
